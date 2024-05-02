@@ -1,0 +1,24 @@
+﻿  Tetris_project.cpp
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(78,19): error C2061: error de sintaxis: identificador 'Tauler'
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(79,14): error C2061: error de sintaxis: identificador 'Tauler'
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(80,13): error C2061: error de sintaxis: identificador 'Tauler'
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(93,10): error C2084: la función 'Figura::~Figura(void)' ya tiene un cuerpo
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(65,3): message : vea la definición anterior de '{dtor}'
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(101,32): error C2761: "void Figura::Desplazarse(void)": no se permite la nueva declaración del miembro
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(101,26): error C2065: 'Tauler': identificador no declarado
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(101,34): error C2065: 'tauler': identificador no declarado
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(101,42): error C2059: error de sintaxis: 'const'
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(101,60): error C2143: error de sintaxis: falta ';' delante de '{'
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(101,60): error C2447: '{': falta el encabezado de función (¿lista formal de estilo anterior?)
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(105,27): error C2761: "void Figura::Baixar(void)": no se permite la nueva declaración del miembro
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(105,21): error C2065: 'Tauler': identificador no declarado
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(105,29): error C2065: 'tauler': identificador no declarado
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(105,37): error C2143: error de sintaxis: falta ';' delante de '{'
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(107,1): error C2059: error de sintaxis: '}'
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(107,1): error C2143: error de sintaxis: falta ';' delante de '}'
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(109,62): error C2143: error de sintaxis: falta ';' delante de '{'
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(109,62): error C2447: '{': falta el encabezado de función (¿lista formal de estilo anterior?)
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(141,2): error C2561: 'Tauler::ComprovaDesplazament': la función debe devolver un valor
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(139,14): message : vea la declaración de 'Tauler::ComprovaDesplazament'
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(146,2): error C2561: 'Tauler::ComprovaGiro': la función debe devolver un valor
+C:\Users\diego\OneDrive\Escritorio\C ++\Tetris_project\Tetris_project\Tetris_project.cpp(144,14): message : vea la declaración de 'Tauler::ComprovaGiro'
