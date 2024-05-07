@@ -104,18 +104,56 @@ TipusFigura asignarTipo(int num_tipo) {
 	return tipo;
 }
 
-
-
-void TrasposarMatriz() {
-	/* Recordar guardar la matriz en una matriz auxiliar para no perderla */
+void inicilizarMatriz(ColorFigura m[F][C], ColorFigura m_aux[F][C]) {
+	for (int i = 0; i < F; i++) {
+		for (int j = 0; j < C; j++) {
+			m[i][j] = m_aux[i][j];
+		}
+	}
 }
 
-void invertirColumnas() {
-	/* Recordar guardar la matriz en una matriz auxiliar para no perderla */
+void invertirColumnas(ColorFigura m[F][C]) {
+	ColorFigura m_aux[F][C];
+
+	int w = C - 1;
+
+	for (int i = 0; i < F; i++) {
+		for (int j = 0; j < C; j++) {
+			m_aux[i][w - j] = m[i][j];
+		}
+	}
+
+	inicilizarMatriz(m, m_aux);
+
 }
 
-void invertirFilas() {
-	/* Recordar guardar la matriz en una matriz auxiliar para no perderla */
+void invertirFilas(ColorFigura m[F][C]) {
+	ColorFigura m_aux[F][C];
+
+	int w = F - 1;
+
+	for (int i = 0; i < F; i++) {
+		for (int j = 0; j < C; j++) {
+			m_aux[w - i][j] = m[i][j];
+		}
+	}
+
+	inicilizarMatriz(m, m_aux);
+
+}
+
+
+void TrasposarMatriz(ColorFigura m[F][C]) {
+	ColorFigura m_aux[F][C];
+
+	for (int i = 0; i < F; i++) {
+		for (int j = 0; j < C; j++;) {
+			m_aux[j][i] = m[i][j];
+		}
+	}
+
+	inicilizarMatriz(m, m_aux);
+	
 }
 
 class Figura {
@@ -132,17 +170,36 @@ public:
 
 	TipusFigura getTipo() const { return m_tipo; }
 	ColorFigura getColor() const { return m_color; }
-	int getX() const { return m_pos_x; }
-	int getY() const { return m_pos_y; }
+	ColorFigura getSquareFigura(const int pos_f, const int pos_c) const { return m_figura[pos_f][pos_c]; }
+	int getFila() const { return m_pos_f; }
+	int getColumna() const { return m_pos_C; }
+	int getFilaInicial() const { return m_inici_f; }
+	int getColumnaInicial() const { return m_inici_c; }
+	int getFilaFinal() const { return m_final_f; }
+	int getColumnaFinal() const { return m_final_c}
+	int getGiro() const { return num_giro; }
+	int getMaxLeft() const { return m_max_left; }
+	int getMaxRight() const { return m_max right; }
 
 	//
-	void GiraFigura(DireccioGir sentit);
+	void GiraFigura(DireccioGir sentit, int num_tipo);
+	void CalculaExtremsMatriu();
+	void CalculaMaxLeftAndRight();
+	void BaixarFigura();
 
 private:
 	TipusFigura m_tipo; 
 	ColorFigura m_color;
-	int m_pos_x;
-	int m_pos_y;
+	ColorFigura m_figura[F][C];
+	int num_giro; // 0 - 3 segun pdf
+	int m_pos_f;
+	int m_pos_c;
+	int m_inici_f;
+	int m_inici_c;
+	int m_final_f;
+	int m_final_c;
+	int m_max_left;
+	int m_max_right
 	
 };
 
@@ -150,11 +207,70 @@ Figura::~Figura() {
 
 }
 
-void Figura::InicialitzarFigura(TipusFigura tipo, ColorFigura color, const int x, const int y) {
+void Figura::InicialitzarFigura(TipusFigura tipo, ColorFigura color, const int x, const int y) { // Inicilizar figura con num_giro = 0
 
 }
 
 void Figura::GiraFigura(DireccioGir sentit) {
+	if (sentit == GIR_HORARI) {
+		if (m_tipo == FIGURA_I) {
+			// Rellenar para figura 4x4
+		}
+		else {
+			if (m_tipo != FIGURA_O) {
+				TrasposarMatriz(m_figura);
+				invertirColumnas(m_figura);
+			}
+		}
+	}
+	else {
+		if (m_tipo == FIGURA_I) {
+			// Rellenar para figura 4x4
+		}
+		else {
+			if (m_tipo != FIGURA_O) {
+				TrasposarMatriz(m_figura);
+				invertirFilas(m_figura);
+			}
+		}
+	}
+}
+
+void Figura::CalculaExtremsMatriu() {
+	if (m_tipo == FIGURA_I) {
+		m_inici_f = m_pos_f - 1;
+		m_inici_c = m_pos_c - 2;
+		m_final_f = m_pos_f + 2;
+		m_final_c = m_pos_c + 1;
+	}
+	else {
+		if (m_tipo == FIGURA_O) {
+			m_inici_f = m_pos_f;
+			m_inici_c = m_pos_c;
+			m_final_f = m_pos_f + 1;
+			m_final_c = m_pos_c + 1;
+		}
+		else {
+			m_inici_f = m_pos_f - 1;
+			m_inici_c = m_pos_c - 1;
+			m_final_f = m_pos_f + 1;
+			m_final_c = m_pos_c + 1;
+		}
+	}
+
+}
+
+void Figura::CalculaMaxLeftAndRight() {
+	int right_max = 0, int left_max = 10, i = 0, j = 1;
+
+	while (i < F - 1) {
+		while (j < C - 1) {
+			if ()
+		}
+	}
+}
+
+void Figura::BaixarFigura() {
 
 }
 
@@ -167,152 +283,121 @@ void Figura::GiraFigura(DireccioGir sentit) {
 class Tauler {
 public:
 	
-	void setSquare(ColorFigura color, int x, int y);
+	void setSquare(ColorFigura color, int f, int c);
 	void AddFigura(int giro, int x, int y, int num_tipo);
 
-	bool ComprovaDesplazament(int x, int y);
-	bool ComprovaGiro(int x, int y);
-	void ColocaFigura(); // Comprueba si tiene que eliminar una columna, y si es asi desplaza la figura una posicion abajo, si no lo deja como estaba
-	void MostraTauler();
+	bool ComprovaDesplazament(Figura figura, int f, int c);
+	bool ComprovaGiro(int x, int y, int giro_inicial, DireccioGir sentit);
+	void eliminarfila();
+	void SetFiguraInTauler(Figura figura, int x, int y);
 
 
 private:
 	ColorFigura m_tauler[F][C];
-	void AddFigura_tipo1(int giro, int x, int y);
-	void AddFigura_tipo2(int giro, int x, int y);
-	void AddFigura_tipo3(int giro, int x, int y);
-	void AddFigura_tipo4(int giro, int x, int y);
-	void eliminarfila();
+	bool ComprovarChoques(int lon_f, int lon_c);
 };
 
-void Tauler::AddFigura_tipo1(int giro, int x, int y) {
-	m_tauler[x][y] = COLOR_GROC;
 
-	switch (giro) {
-	case 0:
-		m_tauler[x][y + 1] = COLOR_GROC;
-		m_tauler[x][y - 1] = COLOR_GROC;
-		m_tauler[x - 1][y - 1] = COLOR_GROC;
-		break;
-	case 1:
-		m_tauler[x + 1][y] = COLOR_GROC;
-		m_tauler[x - 1][y] = COLOR_GROC;
-		m_tauler[x - 1][y + 1] = COLOR_GROC;
-		break;
-	case 2:
-		m_tauler[x][y + 1] = COLOR_GROC;
-		m_tauler[x][y - 1] = COLOR_GROC;
-		m_tauler[x + 1][y + 1] = COLOR_GROC;
-		break;
-	case 3:
-		m_tauler[x - 1][y] = COLOR_GROC;
-		m_tauler[x + 1][y] = COLOR_GROC;
-		m_tauler[x + 1][y - 1] = COLOR_GROC;
-		break;
+/*
+ComprovarChoques(Figura figura, int lon_f, int lon_c):
+
+Parametros: 
+	Figura figura: Figura que esta cayendo en tablero.
+	int lon_f: Numero de filas de la matriz m_figura de la clase Figura.
+	int lon_c: Numero de columnas de la matriz m_figura de la clase Figura.
+
+Descripción:
+	Funcion que comprueba si no existe colision entre la figura que esta cayendo y las diferentes figuras que ya se encuentran en el tablero 
+
+Retorno:
+	Bool: Retorna un true si existe colision, y false en caso contrario
+
+*/
+bool Tauler::ComprovarChoques(Figura figura, int lon_f, int lon_c) {
+	int i = 0, j = 0, w = figura.getFilaInicial(), z = figura.getColumnaInicial();
+	bool out = true;
+
+	while (i < lon_f) {
+		while (j < lon_c) {
+			if (figura.getSquareFigura(i, j) == POSICIO_BUIDA) {
+				if (m_tauler[w + i][z + j] != POSICIO_BUIDA) {
+					out = false;
+				}
+			}
+			j++;
+		}
+		i++;
 	}
+
+	return out;
 }
 
-void Tauler::AddFigura_tipo2(int giro, int x, int y) {
-	m_tauler[x][y] = COLOR_TARONJA;
-
-	switch (giro) {
-	case 0:
-		m_tauler[x][y - 1] = COLOR_TARONJA;
-		m_tauler[x][y + 1] = COLOR_TARONJA;
-		m_tauler[x - 1][y + 1] = COLOR_TARONJA;
-		break;
-	case 1:
-		m_tauler[x + 1][y] = COLOR_TARONJA;
-		m_tauler[x - 1][y] = COLOR_TARONJA;
-		m_tauler[x + 1][y + 1] = COLOR_TARONJA;
-		break;
-	case 2:
-		m_tauler[x][y + 1] = COLOR_TARONJA;
-		m_tauler[x][y - 1] = COLOR_TARONJA;
-		m_tauler[x + 1][y - 1] = COLOR_TARONJA;
-		break;
-	case 3:
-		m_tauler[x - 1][y] = COLOR_TARONJA;
-		m_tauler[x + 1][y] = COLOR_TARONJA;
-		m_tauler[x - 1][y - 1] = COLOR_TARONJA;
-		break;
-	}
-}
-
-void Tauler::AddFigura_tipo3(int giro, int x, int y) {
-	m_tauler[x][y] = COLOR_VERD;
-
-	switch (giro) {
-	case 0:
-		m_tauler[x][y - 1] = COLOR_VERD;
-		m_tauler[x - 1][y] = COLOR_VERD;
-		m_tauler[x - 1][y + 1] = COLOR_VERD;
-		break;
-	case 1:
-		m_tauler[x - 1][y] = COLOR_VERD;
-		m_tauler[x][y + 1] = COLOR_VERD;
-		m_tauler[x + 1][y + 1] = COLOR_VERD;
-		break;
-	case 2:
-		m_tauler[x][y + 1] = COLOR_VERD;
-		m_tauler[x + 1][y - 1] = COLOR_VERD;
-		m_tauler[x + 1][y] = COLOR_VERD;
-		break;
-	case 3:
-		m_tauler[x][y - 1] = COLOR_VERD;
-		m_tauler[x + 1][y] = COLOR_VERD;
-		m_tauler[x - 1][y - 1] = COLOR_VERD;
-		break;
-	}
-}
-
-/// Terminar
-void Tauler::AddFigura_tipo4(int giro, int x, int y) {
-	m_tauler[x][y] = COLOR_VERMELL;
-
-	switch (giro) {
-	case 0:
-		m_tauler[x][y - 1] = COLOR_VERMELL;
-		m_tauler[x - 1][y] = COLOR_VERMELL;
-		m_tauler[x - 1][y + 1] = COLOR_VERMELL;
-		break;
-	case 1:
-		m_tauler[x - 1][y] = COLOR_VERMELL;
-		m_tauler[x][y + 1] = COLOR_VERMELL;
-		m_tauler[x + 1][y + 1] = COLOR_VERMELL;
-		break;
-	case 2:
-		m_tauler[x][y + 1] = COLOR_VERMELL;
-		m_tauler[x + 1][y - 1] = COLOR_VERMELL;
-		m_tauler[x + 1][y] = COLOR_VERMELL;
-		break;
-	case 3:
-		m_tauler[x][y - 1] = COLOR_VERMELL;
-		m_tauler[x + 1][y] = COLOR_VERMELL;
-		m_tauler[x - 1][y - 1] = COLOR_VERMELL;
-		break;
-	}
-}
-
-
-
-void Tauler::setSquare(ColorFigura color, int x, int y) {
+void Tauler::setSquare(ColorFigura color, int f, int c) {
 
 }
 
 
-bool Tauler::ComprovaDesplazament(int x, int y) {
+bool Tauler::ComprovaDesplazament(Figura figura, int f, int c, int dirX) {
+	bool desplazar;
+	
 
+	
 	return;
 }
 
-bool Tauler::ComprovaGiro(int x, int y) {
+bool Tauler::ComprovaGiro(Figura figura,  DireccioGir sentit) {
+	bool gir = true;
 
-	return;
-}
+	// Comprueba si existe colisiones con otras figuras ya colocadas
 
-void Tauler::ColocaFigura() {
+	if (figura.getTipo() == FIGURA_O) {
+			gir = false;
+	}
+	else {
+		gir = ComprovarChoques(figura, 3, 3);
+	}
 
+
+	if (gir) {
+		if ((figura.getGiro() == 3) && (sentit == GIR_HORARI)) {
+			gir = false;
+		}
+		if ((figura.getGiro() == 0) && (sentit == GIR_ANTI_HORARI)) {
+			gir = false;
+		}
+		if ((figura.getTipo() = FIGURA_I) && (gir)) {
+			if((figura.getGiro() == 0) && (sentit == GIR_HORARI)) {
+				if (((m_tauler[figura.getFila() + 1][figura.getColumnaFinal()] != POSICIO_BUIDA) || (m_tauler[figura.getFila() + 1][figura.getColumnaFinal() + 1] != POSICIO_BUIDA)) || (figura.getFilaInicial() == 0)) {
+					gir = false;
+				}
+			}
+			if ((figura.getGiro() == 1) && (sentit == GIR_HORARI)) {
+				if (((m_tauler[figura.getFila()][figura.getColumnaFinal()] != POSICIO_BUIDA) || (m_tauler[figura.getFila()][figura.getColumnaFinal() + 1] != POSICIO_BUIDA) || (m_tauler[figura.getFila()][figura.getColumnaFinal() - 1] != POSICIO_BUIDA) || (m_tauler[figura.getFila() - 1][figura.getColumnaFinal() - 1] != POSICIO_BUIDA)) || (figura.getColumnaFinal() == C - 1)) {
+					gir = false;
+				 }
+			}
+			if ((figura.getGiro() == 2) && (sentit == GIR_ANTI_HORARI)) {
+				gir = ComprovarChoques(figura, 4, 4);
+			}
+			if ((figura.getGiro() == 2) && (sentit == GIR_HORARI)) {
+				if ((m_tauler[figura.getFilaFinal()][figura.getColumna()] != POSICIO_BUIDA) || (m_tauler[figura.getFilaFinal()][figura.getColumna() + 1] != POSICIO_BUIDA) || (m_tauler[figura.getFilaFinal()][figura.getColumna() + 2] != POSICIO_BUIDA) || (m_tauler[figura.getFilaFinal() + 1][figura.getColumna()] != POSICIO_BUIDA) || (m_tauler[figura.getFilaFinal() + 1][figura.getColumna() + 1] != POSICIO_BUIDA) || (m_tauler[figura.getFilaFinal() + 1][figura.getColumna() + 2] != POSICIO_BUIDA) || (figura.getFilaFinal() == F - 2)) {
+					gir = false;
+				}
+			}
+			if ((figura.getGiro() == 3) && (sentit == GIR_ANTI_HORARI)) {
+				gir = ComprovarChoques(figura, 4, 4);
+			}
+
+		}
+		if ((figura.getColumnaFinal() == C) && (sentit == GIR_ANTI_HORARI)) {
+			gir = false;
+		}
+		if ((figura.getFilaFinal() == F)) {
+			gir = false;
+		}
+
+	}
+	return gir;
 }
 
 void Tauler::MostraTauler() {
@@ -323,9 +408,26 @@ void Tauler::eliminarfila() {
 
 }
 
+void Tauler::SetFiguraInTauler(Figura figura, int f, int c) {
 
+	int w = 0, z = 0;
+	int i = figura.getFilaInicial(), j = figura.getColumnaInicial();
 
- 
+	while (i < figura.getColumnaFinal()) {
+		while(j <  figura.getColumnaFinal()){
+			if (m_tauler[i][j] == POSICIO_BUIDA) {
+				m_tauler[i][j] = figura.m_figura[w][z];	
+			}
+			z++;
+			j++;
+		}
+		i++;
+		w++;
+	}
+
+	
+}
+
 
 
 
@@ -370,13 +472,14 @@ void Joc::inicialitza(const string& nomFitxer) {
 		}
 	}
 
-	for (i = 0; i < giro; i++) {
-		figura_actual[0].GiraFigura(GIR_HORARI);
+	figura_actual[0].CalculaExtremsMatriu();
+
+	for (i = 1; i <= giro; i++) {
+		if (tauler.ComprovaGiro(figura_actual[0], GIR_HORARI) {
+			figura_actual[0].GiraFigura(GIR_HORARI);
+		}	
 	}
-
-
-
-
+	tauler.FiguraTauler(figura_actual, fila, columna);
 
 	fitxer.close();
 }
